@@ -1,21 +1,3 @@
-<<<<<<< HEAD
-1. What goal will your website be designed to achieve?
-2. What kind of users will visit your site? In other words, what is the demographic of
-your users?
-3. What data do you plan on using? You may have not picked your actual API yet,
-which is fine, just outline what kind of data you would like it to contain.
-4. In brief, outline your approach to creating your project (knowing that you may not
-know everything in advance and that these details might change later). Answer
-questions like the ones below, but feel free to add more information:
-a. What does your database schema look like?
-b. What kinds of issues might you run into with your API?
-c. Is there any sensitive information you need to secure?
-d. What functionality will your app include?
-e. What will the user flow look like?
-f. What features make your site more than CRUD? Do you have any stretch
-goals?
-=======
->>>>>>> bac616f ("Added info to data to be used.")
 
 
 Capstone 1 Proposal
@@ -31,14 +13,10 @@ Capstone 1 Proposal
 
 3. What data do you plan on using? What kind of API do you want to use?
 
-<<<<<<< HEAD
-    > Travel API's. Flight planner. maybe accomodations. Perhaps more than one if necessary. 
-=======
     > Travel API's. Flight planner. maybe accomodations. Perhaps more than one if necessary.
     > User tables will start out small. Mainly username, password, email, f-name, l-name, phone.
     >> email and phone will be utilized to send links to other users or 3rd party people.
     > A user should be able to search for any piece of a trip and save that piece individually. Then, a user should be able to link pieces of a trip together into one record of itinerary. Can also link multiple users into one itinerary if the travel group is more than one person. 
->>>>>>> bac616f ("Added info to data to be used.")
 
 4. In brief, outline your approach to creating your project.
    1. What does your DB schema look like?
