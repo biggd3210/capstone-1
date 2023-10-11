@@ -1,0 +1,6 @@
+webcams.travel
+Developer.goibibo.com 
+Api.flightapi.io -> free trial for 30 days (50 credits)
+Roadgoat cities api -> useful for budget/safety/covid ratings, geodata
+Amadeus for developers
+worldmapjs.org
