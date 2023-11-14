@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %} Itineraries {% endblock title %}
+
+{% block content %}
+
+    {% include 'internal_nav.html' %}
+
+    {% if g.user.itineraries %}
+        <div class="container">
+            <div class="row">
+        {% for itinerary in g.user.itineraries %}
+                <div class="card mx-3 my-2" style="width: 18rem;">
+                    <img src="/static/images/flight-icon.jpeg" class="card-img-top mt-2" alt="animated plane over earth">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ itinerary.name }}</h5>
+                        <p class="card-text">Number of components: </p>
+                        <p class="card-text"></p>
+                        <p class="card-text"></p>
+                        <p class="card-text">Created By: {{ itinerary.user.name }}</p>
+                        <a href="/itineraries/{{itinerary.id}}/view" class="btn btn-primary">Details</a>
+                        <a href="/itineraries/{{itinerary.id}}/edit" class="btn btn-success">Edit</a>
+                        <a href="/itineraries/{{itinerary.id}}/delete" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+        {% endfor %}
+            </div>
+        </div>
+    {% else %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md 6">
+                <p>You don't currently have any itineraries! Sad Face.</p>
+            </div>
+        </div>
+    </div>
+
+    {% endif %}
+
+    <a class="btn btn-primary" href="/itineraries/add">Add New Itinerary</a>
+
+{% endblock content %}

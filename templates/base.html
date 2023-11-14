@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link rel="stylesheet" href="/static/stylesheets/style.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a href="/" class="navbar-brand">
+              <img src='../../static/images/logo.png' alt="logo">
+              <span id="nav-logo-text">Mappo-Pollo</span>
+            </a>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            
+            {% if not g.user %}
+            <li><a href="/signup">Sign up</a></li>
+            <li><a href="/login">Log in</a></li>
+            {% else %}
+            <li>
+              <a href="/users/{{ g.user.id }}">
+                <img src="{{ g.user.image_url }}" alt="{{ g.user.username }}">
+              </a>
+            </li>
+            <li><a href="/messages/new">New Message</a></li>
+            <li><a href="/logout">Log out</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+    <div class="container justify-content-center">
+      <div class="row align-middle">
+        <img class='col-sm-4 logo' id="main-logo" src="../../static/images/logo.png">
+        <h2 class="col-md-6 display-1 mappo-pollo my-auto">Mappo-Pollo</h2>
+      </div>
+        {% for category, message in get_flashed_messages(with_categories=True) %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      
+        {% block content %}
+        {% endblock %}
+      
+      </div>
+      <script src="https://unpkg.com/@popperjs/core@2"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+      <script src="/static/js/app.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</body>
+</html>

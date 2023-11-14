@@ -1,0 +1,23 @@
+{% for flight in resp %}
+          <div class="card mx-3 my-2" style="width: 18rem;">
+            <img src="/static/images/{{ flight['iataCode'] }}.jpeg" class="airline-logo card-img-top mt-2" alt="animated plane over earth">
+            <div class="card-body">
+              <p class="card-text">Airline: {{ flight['carrier'] }}</p>
+              <p class="card-text">Number of segments: {{ flight['segments'] }}</p>
+              <p class="card-text">Leaving: {{ flight['origin'] }} at {{ flight['departure date'] }} | Arriving: {{ flight['destination'] }} at {{ flight['arrival date'] }}</p>
+              <p class="card-text">Seats Remaining: {{ flight['seats remaining'] }}</p>
+              <p class="card-text">Grand Total: ${{ flight['price'] }}</p>
+              <form action="/itineraries/add-component" method="POST">
+                <select required name='itin_id' id='itin_id' class="form-select" aria-label="itinerary selection">
+                  <option selected>Select Itinerary</option>
+                  <option value="new">Create New Itinerary</option>
+                  {% for itin in itineraries %}
+                  <option value="{{itin.id}}">{{itin.name}}</option>
+                  {% endfor %}
+                </select>
+                <input type="hidden" id="component-info" name="component-info" value="{{flight}}">
+              <button type="submit" class="btn btn-primary">Add to Itinerary</button>
+              </form>
+            </div>
+          </div>
+        {% endfor %}

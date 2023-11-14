@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %} Home Page! {% endblock %}
+
+{% block content %}
+
+{% if g.user %}
+
+    {% include 'internal_nav.html' %}
+
+{% else %}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-6 mt-5">
+            <h3 class="mappo-pollo">Hi there! You'll have to sign in in order to interact with our site.</h3>
+            <h4 class="mappo-pollo">Why would you want to do that? Let's have a brief overview of what you can do with Mappo-Pollo!</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mx-3 my-2" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">See Trip options!</h5>
+                  <p class="card-text">View flights, accommodations, excursions and more!</p>
+                  <p class="card-text">Compile your components into itineraries that you can share with friends.</p>
+                  <p class="card-text">Rough out your idea for a trip so you can compare different options.</p>
+                </div>
+              </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6 mt-4 ">
+            <a class="btn btn-lg btn-primary" href="/login">Login</a>
+            <a class="btn btn-lg btn-primary" href="/signup">Signup</a>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+{% endblock %}

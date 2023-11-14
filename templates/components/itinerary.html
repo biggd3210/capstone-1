@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ itin.name }} {% endblock title %}
+
+{% block content %}
+
+{% include 'internal_nav.html' %}
+<div class="container">
+    <div class="row">
+        <h1 class="display-1">Here's your trip!</h1>
+    </div>
+    <div class="row">
+        {% if itin.flights %}
+            {% for flight in itin.flights %}
+            <div class="card mx-3 my-2" style="width: 18rem;">
+                <img src="/static/images/flight-icon.jpeg" class="card-img-top mt-2" alt="animated plane over earth">
+                <div class="card-body">
+                  <h5 class="card-title"> Flight: {{ flight['id'] }}</h5>
+                  <p class="card-text">Number of segments: {{ flight['segments'] }}</p>
+                  <p class="card-text">Leaving: {{ flight['origin'] }} at {{ flight['departure date'] }} | Arriving: {{ flight['destination'] }} at {{ flight['arrival date'] }}</p>
+                  <p class="card-text">Seats Remaining: {{ flight['seats remaining'] }}</p>
+                  <p class="card-text">Grand Total: ${{ flight['price'] }}</p>
+                </div>
+              </div>
+              <div class="card mx-3 my-2" style="width: 18rem;">
+                <img src="/static/images/flight-icon.jpeg" class="card-img-top mt-2" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Flight: {{ flight['id'] }}</h5>
+                  <p class="card-text">{{ flight['origin'] }} to {{ flight['destination'] }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Departure: {{ flight['departure_date'] }}</li>
+                  <li class="list-group-item">Arrival: {{ flight['arrival_date'] }}</li>
+                  <li class="list-group-item">Segments: {{ flight['segments'] }}</li>
+                  <li class="list-group-item">Grand Total: {{ flight['price'] }}</li>
+                </ul>
+                <div class="card-body">
+                    <form action="/itineraries/delete-component" name="delete-component" method="POST">
+                        <input name="flight_id" type="hidden" value="{{ flight['id'] }}">
+                        <input name="itin_id" type="hidden" value="{{ itin.id }}">
+                        <button type="submit" class="card-link btn btn-danger">Remove Component</button>
+                    </form>
+                </div>
+              </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}
