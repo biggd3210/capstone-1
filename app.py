@@ -370,7 +370,7 @@ def share_itinerary():
 
 #----------- Search Routes -------------
 
-@app.route('/flights/search', methods=['POST'])
+@app.route('/flights/search', methods=['GET', 'POST'])
 def search_flights():
     """Show form for searching flights, return results from API"""
 
@@ -392,8 +392,7 @@ def search_flights():
 
         if form.returnDate.data != None:
             params['returnDate'] = format_date(form.returnDate.data)
-        # if form.time.data != None:
-        #     params['time'] = format_time(form.time.data)
+        
 
         resp = search_available_flights(params)
         itineraries = g.user.itineraries
@@ -444,11 +443,6 @@ def search_rooms():
     try:
         offers = search_hotel_offers(params)
         offer = format_room_data(offers)
-        print('---------')
-        print('offer is ', offer)
-        print('----------')
-        print('offers is ', offers)
-        print('---------')
         return jsonify(offer)
     except:
         offer = {"message": "Sorry, there are no available rooms at this hotel."}
