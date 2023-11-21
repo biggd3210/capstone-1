@@ -126,6 +126,13 @@ class Itinerary(db.Model):
         lazy='subquery'
     )
 
+    accommodations = db.relationship(
+        "Accommodation",
+        secondary='itinerary_components',
+        backref='itineraries',
+        lazy='subquery'
+    )
+
     user = db.relationship(
         "User",
         lazy="subquery"
@@ -211,8 +218,13 @@ class Accommodation(db.Model):
         primary_key=True
     )
 
-    vendor = db.Column(
+    hotel_name = db.Column(
         db.Text,
+        nullable=False
+    )
+
+    hotel_amadeus_id = db.Column(
+        db.String,
         nullable=False
     )
 
@@ -226,8 +238,18 @@ class Accommodation(db.Model):
         nullable=False
     )
 
-    location = db.Column(
+    latitude = db.Column(
         db.Text,
+        nullable=False
+    )
+
+    longitude = db.Column(
+        db.Text,
+        nullable=False
+    )
+
+    number_of_guests = db.Column(
+        db.Integer,
         nullable=False
     )
 
@@ -236,10 +258,12 @@ class Accommodation(db.Model):
         nullable=False
     )
 
-    per_night = db.Column(
-        db.Float,
+    currency = db.Column(
+        db.String,
         nullable=False
     )
+
+    
 
 class Transfer(db.Model):
     """Table for transfers, perhaps not frequently used but for things more like taxis, ubers or otherwise connecting from airport to accommodation or otherwise."""

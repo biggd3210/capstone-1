@@ -1,0 +1,39 @@
+<!-- Modal -->
+<div class="modal fade" id="room" tabindex="-1" role="dialog" aria-labelledby="roomLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Available Room</h5>
+            <button type="button" id="close-modal" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <p>Dates formatted in YYYY-MM-DD.</p>
+            <p>Check in date: <span id="checkInDate"></span></p>
+            <p>Check out date: <span id="checkOutDate"></span></p>
+            <p>Hotel: <span id="hotelName"></span></p>
+            <p>Number of Guests: <span id="adults"></span></p>
+            <p>Price total: <span id="price"></span></p>
+            <p>Currency: <span id="currency"></span></p>
+        </div>
+        <div class="modal-body" id="room-error">
+            <p>We're sorry, but there are currently no available rooms at this hotel. If you continue to see this error and believe it is in error, please contact the hotel directly.</p>
+        </div>
+        <div class="modal-footer" id="modal-footer">
+            <form action="/itineraries/add-component" method="POST">
+                <select required name='itin_id' id='itin_id' class="form-select" aria-label="itinerary selection">
+                    <option selected>Select Itinerary</option>
+                    <option value="new">Create New Itinerary</option>
+                    {% for itin in itineraries %}
+                    <option value="{{itin.id}}">{{itin.name}}</option>
+                    {% endfor %}
+                </select>
+                <input type="hidden" id="component_info" name="component-info" value="0">
+                <input type="hidden" id="search_type" name="search_type" value="{{type}}">
+                <button type="submit" class="btn btn-primary">Add to Itinerary</button>
+                </form>
+        </div>
+        </div>
+    </div>
+</div>

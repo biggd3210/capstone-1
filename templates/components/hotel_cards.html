@@ -1,14 +1,13 @@
 {% for hotel in resp %}
     <div class="card mx-3 my-2" style="width: 18rem;">
-    <img src="/static/images/flight-icon.jpeg" class="airline-logo card-img-top mt-2" alt="animated plane over earth">
+    <img src="/static/images/hotel_icon.png" class="card-img-top mt-2" alt="hotel logo">
     <div class="card-body">
         <title class="card-title">Hotel: {{ hotel['hotel_name'] }} </title>
         <p class='card-text'>Hotel: {{ hotel['hotel_name'] }}</p>
         <p class="card-text">Near: {{ hotel['iataCode'] }}</p>
-        <form action="/hotels/rooms/search" method="POST">
-            
+        <form>
             <input type="hidden" id="component-info" name="hotelId" value="{{ hotel['hotelId'] }}">
-        <button type="submit" class="btn btn-primary view-rooms">View Available Rooms</button>
+        <button class="view-rooms btn btn-primary view-rooms" value="{{ hotel['hotelId'] }}" data-toggle="modal" data-target="#room">View Available Rooms</button>
         </form>
     </div>
     </div>

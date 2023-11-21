@@ -1,14 +1,17 @@
 """Communications for Amadeus API's."""
 
-from secret import AMADEUS_API_KEY, AMADEUS_API_SECRET
+from secret import AMADEUS_API_KEY, AMADEUS_API_SECRET, MAILJET_API_KEY, MAILJET_SECRET_KEY
 import requests, json
 from amadeus import Client, ResponseError
 from helpers import format_date, format_time, format_date_time
+from mailjet_rest import Client
 
 amadeus = Client(
     client_id = AMADEUS_API_KEY,
     client_secret = AMADEUS_API_SECRET
 )
+
+mailjet = Client(auth=(MAILJET_API_KEY, MAILJET_SECRET_KEY), version='v3')
 
 # -------------- *****------------------
 # Amadeus API information. Note some routes require v1 and some require v2. 'v1 / v2' left off base url and affixed to route variable.
@@ -152,6 +155,21 @@ def search_accommodations(params):
 def format_room_data(jobj):
     """returns useable info from hotel room offers API."""
 
+    boomerang = {}
+
+    boomerang['hotelId'] = jobj[0]['hotel']['hotelId']
+    boomerang['longitude'] = jobj[0]['hotel']['longitude']
+    boomerang['latitude'] = jobj[0]['hotel']['latitude']
+    boomerang['hotelName'] = jobj[0]['hotel']['name']
+    boomerang['checkInDate'] = jobj[0]['offers'][0]['checkInDate']
+    boomerang['checkOutDate'] = jobj[0]['offers'][0]['checkOutDate']
+    boomerang['numOfGuests'] = jobj[0]['offers'][0]['guests']['adults']
+    boomerang['price'] = jobj[0]['offers'][0]['price']['total']
+    boomerang['currency'] = jobj[0]['offers'][0]['price']['currency']
+
+    return boomerang
+
+
 def search_hotel_offers(params):
     """Searches api for room offers of hotels."""
 
@@ -161,5 +179,15 @@ def search_hotel_offers(params):
         checkInDate= '2023-12-20',
         checkOutDate= '2023-12-21'
     )
+    print('------------------------------')
     print('resp from search_hotel_offers() is ', resp.data)
+    print('---------------------------------')
     return resp.data
+
+def share_itinerary_mailjet(params):
+    """calls to mailjet API to share link to itinerary."""
+
+    res = mailjet.send.create(data=params)
+    status = res.json()
+
+    return status

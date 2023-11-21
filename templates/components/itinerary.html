@@ -7,22 +7,17 @@
 {% include 'internal_nav.html' %}
 <div class="container">
     <div class="row">
-        <h1 class="display-1">Here's your trip!</h1>
+        <h1 class="display-1">{{ itin.name }} 
+            <a href='/itineraries/{{itin.id}}/edit' class="btn btn-success">Edit</a>
+            <button id="itin_share" type="button" class="btn btn-primary" data-toggle="modal" data-target="#itin_share_modal">
+                Share
+            </button>
+        </h1>
     </div>
     <div class="row">
         {% if itin.flights %}
             {% for flight in itin.flights %}
-            <div class="card mx-3 my-2" style="width: 18rem;">
-                <img src="/static/images/flight-icon.jpeg" class="card-img-top mt-2" alt="animated plane over earth">
-                <div class="card-body">
-                  <h5 class="card-title"> Flight: {{ flight['id'] }}</h5>
-                  <p class="card-text">Number of segments: {{ flight['segments'] }}</p>
-                  <p class="card-text">Leaving: {{ flight['origin'] }} at {{ flight['departure date'] }} | Arriving: {{ flight['destination'] }} at {{ flight['arrival date'] }}</p>
-                  <p class="card-text">Seats Remaining: {{ flight['seats remaining'] }}</p>
-                  <p class="card-text">Grand Total: ${{ flight['price'] }}</p>
-                </div>
-              </div>
-              <div class="card mx-3 my-2" style="width: 18rem;">
+                <div class="card mx-3 my-2" style="width: 18rem;">
                 <img src="/static/images/flight-icon.jpeg" class="card-img-top mt-2" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">Flight: {{ flight['id'] }}</h5>
@@ -36,14 +31,42 @@
                 </ul>
                 <div class="card-body">
                     <form action="/itineraries/delete-component" name="delete-component" method="POST">
+                        <input name="component_type" type="hidden" value="Flight">
                         <input name="flight_id" type="hidden" value="{{ flight['id'] }}">
                         <input name="itin_id" type="hidden" value="{{ itin.id }}">
                         <button type="submit" class="card-link btn btn-danger">Remove Component</button>
                     </form>
                 </div>
-              </div>
+                </div>
             {% endfor %}
         {% endif %}
+        {% if itin.accommodations %}
+            {% for room in itin.accommodations %}
+            <div class="card mx-3 my-2" style="width: 18rem;">
+                <img src="/static/images/hotel_icon.png" class="card-img-top mt-2" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Stay</h5>
+                  <p class="card-text">{{ room.hotel_name }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">From: {{ room.check_in }}</li>
+                    <li class="list-group-item">To: {{ room.check_out }}</li>
+                    <li class="list-group-item">Number of guests: {{ room.number_of_guests }}</li>
+                    <li class="list-group-item">Grand Total: {{ room.currency }}{{ room.price}}</li>
+                </ul>
+                <div class="card-body">
+                    <form action="/itineraries/delete-component" name="delete-component" method="POST">
+                        <input name="component_type" type="hidden" value="Hotel">
+                        <input name="room_id" type="hidden" value="{{room.id}}">
+                        <input name="itin_id" type="hidden" value="{{itin.id}}">
+                        <button type="submit" class="card-link btn btn-danger">Remove Component</button>
+                    </form>
+                </div>
+                </div>
+
+            {% endfor %}
+        {% endif %}
+        {% include 'components/share_itin_modal.html' %}
     </div>
 </div>
 

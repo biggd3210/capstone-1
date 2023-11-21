@@ -43,4 +43,3 @@ class ItineraryForm(FlaskForm):
     """form for creating new or editing itinerary."""
 
     name=StringField("Name", validators=[DataRequired()])
-    # travel_party_id=IntegerField("Travel Party", validators=[Optional()])

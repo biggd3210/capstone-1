@@ -1,0 +1,30 @@
+<!-- Modal -->
+<div class="modal fade" id="itin_share_modal" tabindex="-1" role="dialog" aria-labelledby="itinShareLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Share Itinerary</h5>
+            <button type="button" id="close-modal" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div id="flash-share" class="modal-body" id="modal-body">
+            <form id="itin_share_form" name="itin_share_form" method="POST">
+                <input type="hidden" id="link" name="link" value="127.0.0.1:5000/itineraries/{{itin.id}}/view">
+                <label for="from_email">From Email</label>
+                <input class="form-control my-2" type="email" id="from_email" name="from_email" value="mappo.pollo@gmail.com">
+                <label for="to_email">To Email</label>
+                <input class="form-control my-2" type="email" id="to_email" required name="to_email" placeholder="Who would you like to view your itinerary?">
+                <label for="subject">Subject</label>
+                <input class="form-control my-2" type="text" id="subject" required name="subject" value="Itinerary from Mappo-Pollo!">
+                <label for="body">Body</label>
+                <input class="form-control my-2" type="text" id="body" required name="body" value="Please use the following link to view my itinerary!">
+            </form>
+        </div>
+        <div class="modal-footer" id="modal-footer">
+            <button id="cancel_share" class="btn btn-danger">Cancel</button>
+            <button id="confirm_share" class="btn btn-primary">Share</button>
+        </div>
+        </div>
+    </div>
+</div>
