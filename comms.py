@@ -4,12 +4,13 @@ from secret import AMADEUS_API_KEY, AMADEUS_API_SECRET, MAILJET_API_KEY, MAILJET
 import requests, json
 from amadeus import Client, ResponseError
 from helpers import format_date, format_time, format_date_time
-from mailjet_rest import Client
 
 amadeus = Client(
     client_id = AMADEUS_API_KEY,
     client_secret = AMADEUS_API_SECRET
 )
+
+from mailjet_rest import Client
 
 mailjet = Client(auth=(MAILJET_API_KEY, MAILJET_SECRET_KEY), version='v3')
 
