@@ -10,7 +10,7 @@
         </div>
         <div id="flash-share" class="modal-body" id="modal-body">
             <form id="itin_share_form" name="itin_share_form" method="POST">
-                <input type="hidden" id="link" name="link" value="127.0.0.1:5000/itineraries/{{itin.id}}/view">
+                <input type="hidden" id="link" name="link" value="{{ url_for('show_unique_itinerary', itinerary_id=itin.id) }}">
                 <label for="from_email">From Email</label>
                 <input class="form-control my-2" type="email" id="from_email" name="from_email" value="mappo.pollo@gmail.com">
                 <label for="to_email">To Email</label>
