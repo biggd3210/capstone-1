@@ -177,12 +177,10 @@ def search_hotel_offers(params):
     resp = amadeus.shopping.hotel_offers_search.get(
         hotelIds=params['hotelIds'],
         adults=params['adults'],
-        checkInDate= '2023-12-20',
-        checkOutDate= '2023-12-21'
+        checkInDate= params['checkInDate'],
+        checkOutDate= params['checkOutDate']
     )
-    print('------------------------------')
-    print('resp from search_hotel_offers() is ', resp.data)
-    print('---------------------------------')
+
     return resp.data
 
 def share_itinerary_mailjet(params):

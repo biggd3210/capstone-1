@@ -383,8 +383,8 @@ def search_flights():
     if form.validate_on_submit():
         
         params = {
-            "origin" : form.origin.data,
-            'destination' : form.destination.data,
+            "origin" : form.origin.data.upper(),
+            'destination' : form.destination.data.upper(),
             'px_num' : str(form.adult_px.data),
             'departureDate' : format_date(form.departureDate.data),
             'returnDate' : ''
@@ -424,11 +424,13 @@ def search_hotels():
             "checkOutDate" : format_date(form.checkOutDate.data),
             "adults" : form.adults.data
         }
-
+        checkIn = format_date(form.checkInDate.data)
+        checkOut = format_date(form.checkOutDate.data)
+        adults = form.adults.data
         resp = search_accommodations(params)
         itineraries = g.user.itineraries
 
-        return render_template('/components/results.html', resp=resp, itineraries=itineraries, type="Hotel")
+        return render_template('/components/results.html', resp=resp, itineraries=itineraries, checkIn=checkIn, checkOut=checkOut, adults=adults, type="Hotel")
     
     return render_template('/components/search.html', form=form, type='Hotel')
 
@@ -438,7 +440,9 @@ def search_rooms():
 
     params = {
         'hotelIds' : request.json['hotelIds'],
-        'adults' : request.json['adults']
+        'adults' : request.json['adults'],
+        'checkInDate' : request.json['checkInDate'],
+        'checkOutDate' : request.json['checkOutDate']
     }
     try:
         offers = search_hotel_offers(params)

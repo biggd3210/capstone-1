@@ -4,7 +4,20 @@
 
 {% block content %}
 
-<h1 class='display-1'>Available {{type}}s</h1>
+<h1 class='display-1'>Available {{type}}s</h1> 
+{% if type == 'Hotel' %}
+<div class="row">
+  <form class="form-inline">
+    <label for="checkIn">Check in:</label>
+    <input class="form-control" type="date" id="checkIn" name="checkIn" value="{{ checkIn }}">
+    <label for="checkOut">Check out:</label>
+    <input class="form-control" type="date" id="checkOut" name="checkOut" value="{{ checkOut }}">
+    <label for="numAdults">Number of adults:</label>
+    <input class="form-control" type="integer" id="numAdults" name="numAdults" value="{{ adults }}">
+  </form>
+</div>
+
+{% endif %}
 <div class="container">
     <div class="row justify-content-center">
       {% if type == "Flight" %}

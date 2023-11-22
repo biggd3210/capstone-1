@@ -3,9 +3,9 @@
 body {
     background-image: url('/static/images/papyrus-background.jpeg');
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100%;
     background-attachment: fixed;
-    height: 100vh;
+    height: 100%;
     /* font-family: 'Caveat', cursive; */
 }
 

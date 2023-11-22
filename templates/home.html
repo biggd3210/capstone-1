@@ -6,7 +6,19 @@
 
 {% if g.user %}
 
-   
+   <div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-6 mt-5">
+            <div class="card mx-3 my-2" style="width: 30rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Let's get started!</h5>
+                    <p class="card-text ">To search for flights or hotels, click the magnifying class in the top right corner.</p>
+                    <p class="card-text ">To view your profile or saved itineraries, click the user icon in the top right corner.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+   </div>
 
 {% else %}
 
@@ -17,9 +29,9 @@
             <h4 class="mappo-pollo">Why would you want to do that? Let's have a brief overview of what you can do with Mappo-Pollo!</h4>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card mx-3 my-2" style="width: 18rem;">
+    <div class="row justify-content-center">
+        <div class="col-md-6 mt-4 text-center">
+            <div class="card mx-3 my-2" style="width: 30rem;">
                 <div class="card-body">
                   <h5 class="card-title">See Trip options!</h5>
                   <p class="card-text">View flights, accommodations, excursions and more!</p>
@@ -30,7 +42,7 @@
         </div>
     </div>
     <div class="row justify-content-center">
-        <div class="col-md-6 mt-4 ">
+        <div class="col-md-6 mt-4 text-center">
             <a class="btn btn-lg btn-primary" href="/login">Login</a>
             <a class="btn btn-lg btn-primary" href="/signup">Signup</a>
         </div>

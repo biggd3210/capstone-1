@@ -3,11 +3,13 @@
 const $find_rooms = $('.view-rooms');
 
 // finding and loading available rooms.
-async function load_available_rooms(hotel_id) {
-    console.log('beginning of axios function')
+async function load_available_rooms(hotel_id, adults, checkIn, checkOut) {
+    
     const data = {
         "hotelIds": hotel_id,
-        "adults": "2"
+        "adults": adults,
+        "checkInDate": checkIn,
+        "checkOutDate": checkOut
     }
     const res = await axios.post('/hotels/rooms/search', data);
     return res.data;
@@ -28,7 +30,10 @@ function populate_room_data(room) {
 $find_rooms.on('click', async function(e) {
     e.preventDefault();
     const $hotelId = e.target.value;
-    const rooms = await load_available_rooms($hotelId);
+    const checkInDate = $('#checkIn').val();
+    const checkOutDate = $('#checkOut').val();
+    const adults = $('#numAdults').val();
+    const rooms = await load_available_rooms($hotelId, adults, checkInDate, checkOutDate);
     
     if (rooms['message']) {
         $('#room-error').show();
@@ -58,7 +63,6 @@ function display_sent_message(message, code) {
         .addClass(['alert', `alert-${code}`])
         .text(message)
     $('#flash-share').prepend(flash_msg)
-    console.log('flash_msg is ', flash_msg)
 }
 
 function remove_sent_message() {
