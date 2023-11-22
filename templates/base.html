@@ -28,11 +28,31 @@
             {% if not g.user %}
             <li><a href="/signup">Sign up</a></li>
             <li><a href="/login">Log in</a></li>
+            
             {% else %}
-            <li>
-              <a href="/users/profile">
-                <img src="/static/images/user_logo.png" alt="{{ g.user.username }}">
+            <li class="btn-group px-2">
+              <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="/static/images/user_logo.png" alt="{{ g.user.username }}">
               </a>
+              <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/itineraries">Itineraries</a></li>
+              <li><a class="dropdown-item disabled" href="#">Travel Parties</a></li>
+              <li><a class="dropdown-item disabled" href="#">Friends</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/users/profile">Profile</a></li>
+              </ul>
+            </li>
+            <li class="btn-group px-2">
+              <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="/static/images/search_icon.jpeg" alt="search-icon">
+              </a>
+              <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/flights/search">Flights</a></li>
+              <li><a class="dropdown-item" href="/hotels/search">Accommodations</a></li>
+              <li><a class="dropdown-item disabled" aria-disabled="true" href="#">Excursions</a></li>
+              <li><a class="dropdown-item disabled" aria-disabled="true" href="#">Transfers</a></li>
+              <li><a class="dropdown-item disabled" aria-disabled="true" href="#">Activities</a></li>
+              </ul>
             </li>
             <li><a href="/logout">Log out</a></li>
             {% endif %}

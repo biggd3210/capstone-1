@@ -3,10 +3,12 @@
 body {
     background-image: url('/static/images/papyrus-background.jpeg');
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
     background-attachment: fixed;
+    height: 100vh;
     /* font-family: 'Caveat', cursive; */
 }
+
 
 .mappo-pollo {
   font-family: "Caveat", cursive;

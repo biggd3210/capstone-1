@@ -95,3 +95,7 @@ $('#itin_share').on('click', function() {
 $('#cancel_share').on('click', function() {
     $('#itin_share_modal').modal('toggle');
 })
+
+$('#close-share-modal').on('click', function() {
+    $('#itin_share_modal').modal('toggle');
+})
