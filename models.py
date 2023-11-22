@@ -441,7 +441,7 @@ class User(db.Model):
         return False
     
     @classmethod
-    def signup(cls, username, email, password, name, phone):
+    def signup(cls, username, email, password, name):
         """sign up user and hashes password to store, stores new user in db."""
         hashed_pwd = bcrypt.generate_password_hash(password).decode('UTF-8')
 
@@ -449,8 +449,7 @@ class User(db.Model):
             username=username,
             email=email,
             password=hashed_pwd,
-            name=name,
-            phone=phone
+            name=name
         )
 
         db.session.add(user)
