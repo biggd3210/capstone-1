@@ -90,7 +90,6 @@ def user_signup():
                 password=form.password.data,
                 email=form.email.data,
                 name=form.name.data,
-                phone=form.phone.data
             )
             db.session.commit()
         except IntegrityError:
